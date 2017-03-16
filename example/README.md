@@ -95,22 +95,22 @@ Steps 1 through 5 are the same as above.
 Unlike the RRR-compression step above, the two files representing a node in the uncompressed SBT-AS are converted to two files, with extensions .bf-all.bv.roar and .bf-some.roar.
 
 ```bash  
-    cat sbt.txt \
-      | tr -d "*" \
-      | sed "s/,.*//" \
-      | sed "s/\.bf\.bv//" \
-      | while read node ; do
-          echo "=== ROAR-compressing split ${node} ==="
-          ${bt} compress-roar-single example.hashfile ${node}.bf-all.bv
-          ${bt} compress-roar-single example.hashfile ${node}.bf-some.bv
-          done
+cat sbt.txt \
+  | tr -d "*" \
+  | sed "s/,.*//" \
+  | sed "s/\.bf\.bv//" \
+  | while read node ; do
+      echo "=== ROAR-compressing split ${node} ==="
+      bt compress-roar-single example.hashfile ${node}.bf-all.bv
+      bt compress-roar-single example.hashfile ${node}.bf-some.bv
+      done
 ```
 
 (6b-ROAR) Create the topology file for the compressed ABT-AS.
 
 ```bash  
 cat sbt-as.txt \
-  | sed "s/\.bv/.bv.roar/" \
+  | sed "s/\.bv/.bv.roar/g" \
   > sbt-roar-allsome.txt
 ```
 
