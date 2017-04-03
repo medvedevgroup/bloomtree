@@ -71,7 +71,7 @@ public:
 	~BFCluster();
 
 //----static and constants
-	static const int SUBSET_SIZE; //500kb
+	int SUBSET_SIZE; //500kb
 
 	static const int BITVECTOR_FILE_HEADER_BYTES;
 
@@ -157,6 +157,11 @@ protected:
 	
 	bool CalculateDistanceMatrix();
 
+	int CheckSubsetSize(const std::string & bf_filename,
+						u8* bv,
+						int start_bit,
+						int end_bit);
+
 	TopoNode* ConstructTreeTopologyFromArray(Node * node_array);
 
 	// clustering with linkage union
@@ -170,8 +175,8 @@ protected:
 	// call by constructor
 	bool ReadBitSubsetFromBloomFilter(const std::string & bf_filename,
 									u8* bv, 
-									int start_bit = 0, 
-									int end_bit = SUBSET_SIZE);
+									int start_bit, 
+									int end_bit);
 
 	// call by constructor
 	bool ReadBFFilelist(const std::string & bf_filelist,

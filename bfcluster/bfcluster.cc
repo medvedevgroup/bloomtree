@@ -4,8 +4,6 @@ bool BFCluster::popCountFilled = false;
 
 u32 BFCluster::popCount8[0x100] = {};
 
-const int BFCluster::SUBSET_SIZE = 500000;
-
 const int BFCluster::BITVECTOR_FILE_HEADER_BYTES = 8;
 
 
@@ -39,6 +37,9 @@ BFCluster::BFCluster(const std::string & _hashfunction_filename,
 //----
 // code reviewed
 {
+
+	/*initialize subset_size*/
+	SUBSET_SIZE = 500000;
 
 	enable_debug = _debug;
 	hashfunction_filename = _hashfunction_filename;
@@ -85,6 +86,12 @@ BFCluster::BFCluster(const std::string & _hashfunction_filename,
 	if(bloom_filter_number <= 0){
 		std::cerr << "Error: [BFCluster] not enough bloom filter to generate bloom tree" << std::endl;
 	}
+
+	/*check subset size*/
+	u8* tmp_bv = (u8*)malloc(SUBSET_SIZE / 8); // free memory in destructor
+	SUBSET_SIZE = CheckSubsetSize(bloom_filter_name_list[0], tmp_bv, 0, SUBSET_SIZE);
+	free(tmp_bv);
+	/* --- */
 
 	bitvectors = (u8**)malloc (bloom_filter_number * sizeof(u8*)); // free memory in destructor
 	int subset_bytes_needed = SUBSET_SIZE / 8;
@@ -244,6 +251,37 @@ bool BFCluster::CalculateDistanceMatrix()
 	return true;
 }
 
+int BFCluster::CheckSubsetSize(const std::string & bf_filename,
+								u8* bv,
+								int start_bit,
+								int end_bit) 
+/*
+	check if bloom filter size is large enough
+	return possible bytes
+*/
+{
+	const char * filename = bf_filename.c_str();
+	FILE * f = fopen(filename, "rb");
+	if (f == NULL) {
+		std::cerr << "Error: [BFCluster] error opening '" << bf_filename << "'. " << std::endl;
+		return false;
+	}
+
+	int bytes_to_read = (end_bit - start_bit) / 8;
+	int err = fseek(f, BITVECTOR_FILE_HEADER_BYTES + start_bit / 8, SEEK_SET);
+	if (err != 0) {
+		std::cerr << "Error: [BFCluster] can not seek required start bit." << std::endl;
+		return false;
+	}
+
+	int bytes_read = fread(bv, 1, bytes_to_read, f);
+	fclose(f);
+
+	if (bytes_read != bytes_to_read) {
+		std::cerr << "[BFCluster] adjust sampling size to " << bytes_read << " bytes. " << std::endl;
+	}
+	return bytes_read * 8;
+}
 
 TopoNode* BFCluster::ConstructTreeTopologyFromArray(Node * node_array)
 //----
