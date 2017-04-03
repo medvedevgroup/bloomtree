@@ -26,8 +26,10 @@ To install SBT-AS using the source:
 
 * gcc (Version 4.9.1 or later)
 * Jellyfish (Version 2.2.0 or later)
-* SDSL-lite (Version 2.0 or later)
 * CRoaring (https://github.com/RoaringBitmap/CRoaring)
+* SDSL-lite (April 2017 or later). Note that there was a bug in SDSL-lite prior
+to April 2017, when compiled with clang. If you are using gcc, version 2.0 or
+later should be adequate.
 
 
 The PREQ_INSTALL file contains some helpful information for installing the prerequisites.
