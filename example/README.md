@@ -59,7 +59,7 @@ bt split sbt.txt sbt-as.txt
 Each node is represented in the uncompressed SBT-AS as two files, with extensions .bf-all.bv and .bf-some.bv. These are converted to a single file with extension .bf-allsome.bv.rrr.
 
 ```bash  
-./allsome_to_rrr.sh sbt.txt sbt-as.txt sbt-rrr-allsome.txt
+../src/allsome_to_rrr.sh sbt.txt sbt-as.txt sbt-rrr-allsome.txt
 ```
 
 (7) Run a batch of queries.
@@ -77,7 +77,7 @@ Steps 1 through 5 are the same as above.
 Unlike the RRR-compression step above, the two files representing a node in the uncompressed SBT-AS are converted to two files, with extensions .bf-all.bv.roar and .bf-some.roar.
 
 ```bash  
-./allsome_to_roar.sh sbt.txt sbt-as.txt sbt-roar-allsome.txt
+../src/allsome_to_roar.sh sbt.txt sbt-as.txt sbt-roar-allsome.txt
 ```
 
 (7-ROAR) Run a batch of queries.
