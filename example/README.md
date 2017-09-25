@@ -54,30 +54,12 @@ ls experiment*.bf.bv | sed "s/\.bf\.bv//" > bitvectornames
 bt split sbt.txt sbt-as.txt
 ```
 
-(6a) Compress the SBT-AS bit vectors, creating the node files for a compressed ABT-AS.
+(6) Compress the SBT-AS bit vectors, creating the node files for a compressed ABT-AS. Also create the topology file for the compressed ABT-AS
 
 Each node is represented in the uncompressed SBT-AS as two files, with extensions .bf-all.bv and .bf-some.bv. These are converted to a single file with extension .bf-allsome.bv.rrr.
 
 ```bash  
-cat sbt.txt \
-  | tr -d "*" \
-  | sed "s/,.*//" \
-  | sed "s/\.bf\.bv//" \
-  | while read node ; do
-      echo "=== compressing split ${node} to allsome ==="
-      bt compress-rrr-double example.hashfile \
-        ${node}.bf-all.bv \
-        ${node}.bf-some.bv \
-        ${node}.bf-allsome.bv
-      done
-```
-
-(6b) Create the topology file for the compressed ABT-AS.
-
-```bash  
-cat sbt.txt \
-  | sed "s/\.bf\.bv/.bf-allsome.bv.rrr/" \
-  > sbt-rrr-allsome.txt
+./allsome_to_rrr.sh sbt.txt sbt-as.txt sbt-rrr-allsome.txt
 ```
 
 (7) Run a batch of queries.
@@ -90,28 +72,12 @@ bt query -t 0.5 sbt-rrr-allsome.txt queries queryresults
 
 Steps 1 through 5 are the same as above.
 
-(6a-ROAR) Compress the SBT-AS bit vectors, creating the node files for a compressed ABT-AS.
+(6-ROAR) Compress the SBT-AS bit vectors, creating the node files for a compressed ABT-AS. Also create the topology file for the compressed ABT-AS.
 
 Unlike the RRR-compression step above, the two files representing a node in the uncompressed SBT-AS are converted to two files, with extensions .bf-all.bv.roar and .bf-some.roar.
 
 ```bash  
-cat sbt.txt \
-  | tr -d "*" \
-  | sed "s/,.*//" \
-  | sed "s/\.bf\.bv//" \
-  | while read node ; do
-      echo "=== ROAR-compressing split ${node} ==="
-      bt compress-roar-single example.hashfile ${node}.bf-all.bv
-      bt compress-roar-single example.hashfile ${node}.bf-some.bv
-      done
-```
-
-(6b-ROAR) Create the topology file for the compressed ABT-AS.
-
-```bash  
-cat sbt-as.txt \
-  | sed "s/\.bv/.bv.roar/g" \
-  > sbt-roar-allsome.txt
+./allsome_to_roar.sh sbt.txt sbt-as.txt sbt-roar-allsome.txt
 ```
 
 (7-ROAR) Run a batch of queries.

@@ -1,9 +1,8 @@
-CXXFLAGS+=-Wall -std=c++11 -I$(HOME)/include/roaring
-LDFLAGS+=-lroaring -lsdsl -ldivsufsort -ldivsufsort64 -ljellyfish-2.0 -lz -lpthread #-static
+CXXFLAGS+=-Wall -std=c++11 -I${HOME}/${MACHTYPE}/include -I${HOME}/include/roaring
+LDFLAGS+=-L${HOME}/${MACHTYPE}/lib -lroaring -lsdsl -ldivsufsort -ldivsufsort64 -ljellyfish-2.0 -lz -lpthread #-static
 
 # these shouldnt be necessary, but it helps users who have not set $HOME/[include/lib] in compiler flags
-CXXFLAGS+=-I$(HOME)/include -I$(HOME)/include/jellyfish-2.2.6/ 
-LDFLAGS+=-L$(HOME)/lib -L$(HOME)/lib/jellyfish-2.2.6
+CXXFLAGS+=-I$(HOME)/include/jellyfish-2.2.6/ 
 
 CPP_FILES := $(wildcard *.cc)
 OBJ_FILES := $(addprefix ./,$(notdir $(CPP_FILES:.cc=.o)))
