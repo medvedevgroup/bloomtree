@@ -3,11 +3,11 @@ CXX=g++
 # directory of bloomtree-dev/src 
 BT_PATH=../src
 # directory of roaring library.so
-ROAR_PATH=$(HOME)/include/roaring
+ROAR_PATH=${HOME}/${MACHTYPE}/include/roaring
 # directory of sdsl library.so
-SDSL_PATH=$(HOME)/lib
+SDSL_PATH=${HOME}/${MACHTYPE}/lib
 # directory of jellyfish library.so
-FISH_PATH=$(HOME)/lib
+FISH_PATH=${HOME}/${MACHTYPE}/lib
 # directory of TCLAP head file
 TCLAP_PATH=./include
 
@@ -21,7 +21,7 @@ TBB_LIBRARY_RELEASE=$(TBB_INSTALL_DIR)/build/linux_intel64_gcc_cc5.2.0_libc2.12_
 # also requires head file of roaring, sdsl, jellyfish, tclap in ~/include
 
 CXXFLAGS=-g -std=c++11 -pthread -Wall -O3
-CXXFLAGS+=-I$(HOME)/include -I$(BT_PATH) -I$(HOME)/include/jellyfish-2.2.6/ -I$(TCLAP_PATH)
+CXXFLAGS+=-I${HOME}/${MACHTYPE}/include -I$(BT_PATH) -I${HOME}/${MACHTYPE}/include/jellyfish-2.2.6/ -I$(TCLAP_PATH)
 
 LD_LIB=-L $(ROAR_PATH) -L $(SDSL_PATH) -L $(FISH_PATH)
 LD_FLAG=-lroaring -lsdsl -ldivsufsort -ldivsufsort64 -ljellyfish-2.0 -lz -lpthread
