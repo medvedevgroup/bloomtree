@@ -177,5 +177,9 @@ If using SBT-AS, please cite [1]. This project has been supported in part by NSF
 # References
 
 
-[1] Chen Sun, Robert S. Harris, Rayan Chikhi, and Paul Medvedev. AllSome Sequence Bloom Trees, bioRxiv.  
+[1] Chen Sun, Robert S. Harris, Rayan Chikhi, and Paul Medvedev. Allsome sequence bloom trees. International Conference on Research in Computational Molecular Biology. Springer, Cham, 2017.
 [2] Brad Solomon and Carl Kingsford. Fast search of thousands of short-read sequencing experiments. Nature biotechnology, 2016.
+
+# Errata
+
+In [1], section 5 (Results), an incorrect accession number is given (SRR806782). The correct accession number is SRR805782.
