@@ -1,5 +1,13 @@
 # SBT-AS (AllSome Sequence Bloom Tree).
 
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `AllSome-SBT has been deprecated and subsumed by the HowDe-SBT: https://github.com/medvedevgroup/HowDeSBT/.`
+
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `HowDe-SBT offers most of the features of AllSome but with better performance.`
+
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `If you would like to use the AllSome, please use the HowDe SBT instead.`
+
+
+*************************************
 
 This package implements the SBT-AS data structure presented in [1]. SBT-AS is a variant of the SBT data structure introduced by Solomon and Kingsford [2]. An SBT is a data structure that indexes a set of short-read sequencing experiments and supports fast sequence queries. SBT-AS improves the running time and space usage of the original SBT. The code of SBT-AS is built on top of and uses the original SBT code [1].
 
