@@ -1,10 +1,6 @@
 # SBT-AS (AllSome Sequence Bloom Tree).
 
-![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `AllSome-SBT has been deprecated and subsumed by the HowDe-SBT: https://github.com/medvedevgroup/HowDeSBT/.`
-
-![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `HowDe-SBT offers most of the features of AllSome but with better performance.`
-
-![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `If you would like to use the AllSome, please use the HowDe SBT instead.`
+## AllSome-SBT has been deprecated and subsumed by the HowDe-SBT: https://github.com/medvedevgroup/HowDeSBT/. HowDe-SBT offers most of the features of AllSome but with better performance. If you would like to use the AllSome, please use HowDe  instead.
 
 
 *************************************
